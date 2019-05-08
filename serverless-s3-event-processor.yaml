@@ -11,6 +11,10 @@ Parameters:
     Type: String
     AllowedValues: ["True", "False"]
     ConstraintDescription: Must be boolean.
+  FunctionNameSuffix:
+    Description: 'Suffix to append to the Lambda functions.'
+    Type: 'String'
+    Default: ''
 
 Globals:
   Function:
@@ -28,6 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: 'AWS Lambda to process new S3 Objects - For ex, Image Resizing, Object Recognition, Insert to DynamoDB etc.'
+      FunctionName: !Sub 'EventProcessor-${FunctionNameSuffix}'
       Handler: serverless-s3-event-processor.lambda_handler
       CodeUri: ./src/serverless-s3-event-processor.py
       Events:
@@ -48,3 +53,11 @@ Resources:
 
   EventBucket:
     Type: AWS::S3::Bucket
+
+Outputs:
+  S3EventBucket:
+    Description: S3 Bucket that triggers the Lambda
+    Value: !Ref EventBucket
+  EventProcessorFunction:
+    Description: ARN for the EventProcessor Lambda Function
+    Value: !GetAtt EventProcessor.Arn
