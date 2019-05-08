@@ -52,8 +52,10 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
       },
       "Items": [
         {
-          "bucket_name": "serverless-s3-event-processor-eventbucket-abcd1234",
-          "key": "deploy.sh"
+          "time": "2019-05-08T18:51:00.097Z",
+          "object_owner": "AWS:AIDdR7KsQLWs56LRA",
+          "bucket_name": "serverless-s3-event-processor-eventbucket-novet8m933s4",
+          "key": "c19cf74b-ca14-4458-b2f1-c97b51789f67.xls"
         }
       ]
     }
