@@ -18,7 +18,7 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
 
 1. ## Customize the deployment
 
-    Edit the `./helper_scripts/deploy.sh` to update your environment variables.
+    Edit the `./helper_scripts/deploy.sh` to update your environment variables. The expected output in cloudwatch logs should look like this,
   
     ```sh
     AWS_PROFILE="default"
