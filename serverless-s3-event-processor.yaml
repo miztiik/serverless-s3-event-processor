@@ -14,7 +14,7 @@ Parameters:
   FunctionNameSuffix:
     Description: 'Suffix to append to the Lambda functions.'
     Type: 'String'
-    Default: ''
+    Default: 'Mystique'
 
 Globals:
   Function:
