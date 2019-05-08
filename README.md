@@ -13,7 +13,7 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
 1. ## Clone the repository
 
    ```sh
-   git clone https://github.com/miztiik/dynamodb-streams-processor.git
+   git clone https://github.com/miztiik/serverless-s3-event-processor.git
    ```
 
 1. ## Customize the deployment
@@ -23,7 +23,7 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
     ```sh
     AWS_PROFILE="default"
     BUCKET_NAME="sam-templates-011" # bucket must exist in the SAME region the deployment is taking place
-    SERVICE_NAME="dynamodb-stream-processor"
+    SERVICE_NAME="serverless-s3-event-processor"
     TEMPLATE_NAME="${SERVICE_NAME}.yaml"
     STACK_NAME="${SERVICE_NAME}"
     OUTPUT_DIR="./outputs/"
@@ -39,19 +39,24 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
     ./helper_scripts/deploy.sh
     ```
   
-1. ## Test Stream Processor
+1. ## Test Event Processor
 
-    Insert a simple item to the table, either from the GUI/CLI
+    Upload an object to the S3 Bucket or use the `events.json` in the `src` directory to test the lambda function. In the lambda logs you will see the following output,
 
     ```json
-    ddb_name="dynamodb-stream-processor-DynamoDBTable-N8Z22Q0GILUH"
-    for i in {1..10}
-     do
-      val=${RANDOM}
-      aws dynamodb put-item \
-        --table-name "${ddb_name}" \
-        --item '{ "Username": {"S":"User_'${i}'"},"Timestamp": {"S":"'$(date +"%d/%m/%Y-%H:%M:%S")'"},"Message":{"S":"Mystique_Msg_'${val}'"} }'
-     done
+    {
+      "status": "True",
+      "TotalItems": {
+        "Received": 1,
+        "Processed": 1
+      },
+      "Items": [
+        {
+          "bucket_name": "serverless-s3-event-processor-eventbucket-abcd1234",
+          "key": "deploy.sh"
+        }
+      ]
+    }
     ```
 
 ### Contact Us
