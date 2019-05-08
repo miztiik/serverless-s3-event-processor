@@ -29,7 +29,7 @@ Resources:
       Description: AWS Lambda to process new S3 Objects - For ex, Image Resizing,
         Object Recognition, Insert to DynamoDB etc.
       Handler: serverless-s3-event-processor.lambda_handler
-      CodeUri: s3://sam-templates-011/f38c186e20913f3457f48fb176745876
+      CodeUri: s3://sam-templates-011/c6cb221d69610da82aef2b74e609205b
       Events:
         EventTrigger1:
           Type: S3
