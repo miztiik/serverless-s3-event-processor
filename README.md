@@ -41,7 +41,7 @@ Lets say, we have to do some action for every object uploaded / added to S3 Buck
   
 1. ## Test Event Processor
 
-    Upload an object to the S3 Bucket or use the `events.json` in the `src` directory to test the lambda function. In the lambda logs you will see the following output,
+    Upload an object to the S3 Bucket or use the `event.json` in the `src` directory to test the lambda function. In the lambda logs you will see the following output,
 
     ```json
     {
