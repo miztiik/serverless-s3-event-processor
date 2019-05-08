@@ -41,13 +41,14 @@ def lambda_handler(event, context):
         return resp
 
     for r in event.get('Records'):
-        # Lets skip the records that not Put
+        # Lets skip the records that are Put/Object Create events
         if not ( ( r.get('eventName') == "ObjectCreated:Put" )  and ( 's3' in r ) ) : continue
         d = {}
-        d['bucket_name'] = r['s3']['bucket']['name']
-        d['key'] = r['s3']['object']['key']
+        d['eventTime']      = r['eventTime']
+        d['object_owner']   = r['userIdentity']['principalId']
+        d['bucket_name']    = r['s3']['bucket']['name']
+        d['key']            = r['s3']['object']['key']
         resp['Items'].append(d)
-
 
     if resp.get('Items'):
         resp['status'] = True
